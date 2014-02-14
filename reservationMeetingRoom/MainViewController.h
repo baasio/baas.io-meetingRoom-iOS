@@ -1,13 +1,13 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  reservationMeetingRoom
 //
-//  Created by DGMacBook on 2014. 2. 12..
+//  Created by DGMacBook on 2014. 2. 14..
 //  Copyright (c) 2014년 kt. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MainViewController : UIViewController
 
 @end
