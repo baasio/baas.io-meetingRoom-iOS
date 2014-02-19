@@ -7,14 +7,14 @@
 //
 
 #import "SignUpViewController.h"
-#import "Toast+UIView.h"
 #import <baas.io/Baas.h>
+#import <TWMessageBarManager/TWMessageBarManager.h>
 
 @interface SignUpViewController () <UITextFieldDelegate>
 @property (nonatomic, strong) IBOutlet UITextField *idField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UITextField *emailField;
-@property (nonatomic, strong) IBOutlet UITextField *teamField;
+@property (nonatomic, strong) IBOutlet UITextField *organizationField;
 @property (nonatomic, strong) IBOutlet UITextField *nameField;
 
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
@@ -57,7 +57,7 @@
     [user setObject:self.passwordField.text forKey:@"password"];
     [user setObject:self.nameField.text forKey:@"name"];
     [user setObject:self.emailField.text forKey:@"email"];
-    [user setObject:self.teamField.text forKey:@"team"];
+    [user setObject:self.organizationField.text forKey:@"organization"];
     
     [user signUpInBackground:^{
         [self.userDefaults setObject:self.idField.text forKey:@"userName"];
@@ -73,7 +73,7 @@
         
     } failureBlock:^(NSError *error) {
         NSLog(@"회원가입이 실패했습니다 : %@", error);
-        [self.view makeToast:[NSString stringWithFormat:@"회원가입이 실패했습니다 : %@", error] duration:3.0 position:[NSValue valueWithCGPoint:self.view.center]];
+        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"회원가입에 실패했습니다" description:error.description type:TWMessageBarMessageTypeError];
     }];
 }
 

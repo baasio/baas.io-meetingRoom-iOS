@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <baas.io/Baas.h>
+#import <TWMessageBarManager/TWMessageBarManager.h>
 
 @interface LoginViewController () <UITextFieldDelegate>
 @property (nonatomic, strong) IBOutlet UITextField *userNameField;
@@ -52,6 +53,7 @@
         
     } failureBlock:^(NSError *error) {
         NSLog(@"로그인 에러 : %@", error);
+        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"로그인 실패" description:error.description type:TWMessageBarMessageTypeError];
     }];
 }
 
