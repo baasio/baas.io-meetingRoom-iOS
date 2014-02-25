@@ -1,21 +1,21 @@
 PODS:
-  - DropdownMenu (1.0.0)
   - ReactiveCocoa (2.2.3):
     - ReactiveCocoa/Core
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/Core (2.2.3):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.2.3)
+  - RNBlurModalView (0.1.0)
   - TWMessageBarManager (1.3.2)
 
 DEPENDENCIES:
-  - DropdownMenu
   - ReactiveCocoa
+  - RNBlurModalView
   - TWMessageBarManager
 
 SPEC CHECKSUMS:
-  DropdownMenu: 3c454205c2db1fd39dc1ebf099114c4fdb73f136
   ReactiveCocoa: b3cb6ebd50f1a0f2e39c6fd7ce3c428b6efcb22b
+  RNBlurModalView: ab3855ced43749cb0fb4d370160bd2908476c8b6
   TWMessageBarManager: e14110324f2b2e821ba0880805a0655cbdb76e82
 
 COCOAPODS: 0.29.0

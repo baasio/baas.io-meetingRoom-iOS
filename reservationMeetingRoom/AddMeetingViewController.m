@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *dateField;
 @property (nonatomic, strong) IBOutlet UITextField *startTimeField;
 @property (nonatomic, strong) IBOutlet UITextField *endTimeField;
+@property (nonatomic, strong) IBOutlet UITextField *meetingDescriptionField;
 
 @property (nonatomic, strong) IBOutlet UIDatePicker *datePicker;
 @property (nonatomic, strong) IBOutlet UIPickerView *roomPicker;
@@ -39,6 +40,8 @@
 @synthesize currentDateField;
 @synthesize dateFormatter;
 @synthesize currentUser;
+@synthesize addType;
+@synthesize updateData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,6 +77,37 @@
     }];
 }
 
+- (void)saveReservation {
+    BaasioEntity *reservationEntity = [BaasioEntity entitytWithName:@"meetings"];
+    [reservationEntity setObject:self.startTimeField.text forKey:@"startTime"];
+    [reservationEntity setObject:self.endTimeField.text forKey:@"endTime"];
+    [reservationEntity setObject:self.dateField.text forKey:@"date"];
+    [reservationEntity setObject:[currentUser objectForKey:@"name"] forKey:@"userName"];
+    [reservationEntity setObject:[currentUser objectForKey:@"username"] forKey:@"userId"];
+    [reservationEntity setObject:self.roomNameField.text forKey:@"roomName"];
+    [reservationEntity setObject:[currentUser objectForKey:@"organization"] forKey:@"organization"];
+    [reservationEntity setObject:self.meetingDescriptionField.text forKey:@"description"];
+    
+    if ([self.addType isEqualToString:@"update"]) {
+        [reservationEntity setUuid:[self.updateData objectForKey:@"uuid"]];
+        [reservationEntity updateInBackground:^(id entity) {
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 수정 성공" description:@"예약이 수정되었습니다" type:TWMessageBarMessageTypeSuccess];
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:^(NSError *error) {
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 수정 실패" description:@"예약 수정이 실패했습니다" type:TWMessageBarMessageTypeError];
+            NSLog(@"%@", error);
+        }];
+    } else {
+        [reservationEntity saveInBackground:^(BaasioEntity *entity) {
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 성공" description:@"예약이 완료되었습니다" type:TWMessageBarMessageTypeSuccess];
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:^(NSError *error) {
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 실패" description:@"예약이 실패했습니다" type:TWMessageBarMessageTypeError];
+            NSLog(@"%@", error);
+        }];
+    }
+}
+
 #pragma mark - IBAction
 - (void)addReservation {
     if ([self.startTimeField.text isEqualToString:@""] || [self.endTimeField.text isEqualToString:@""] || [self.roomNameField.text isEqualToString:@""] || [self.dateField.text isEqualToString:@""]) {
@@ -94,33 +128,55 @@
             break;
     }
     
-    //TODO: 미리 예약된 정보 체크
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"meetings"];
+    [query setProjectionIn:@"*"];
+    [query setOrderBy:@"startTime" order:BaasioQuerySortOrderASC];
+    [query setWheres:[NSString stringWithFormat:@"organization = '%@' AND roomName = '%@' AND date = '%@'", [currentUser objectForKey:@"organization"], self.roomNameField.text, self.dateField.text]];
     
-    BaasioEntity *reservationEntity = [BaasioEntity entitytWithName:@"meetings"];
-    [reservationEntity setObject:self.startTimeField.text forKey:@"startTime"];
-    [reservationEntity setObject:self.endTimeField.text forKey:@"endTime"];
-    [reservationEntity setObject:self.dateField.text forKey:@"date"];
-    [reservationEntity setObject:[currentUser objectForKey:@"name"] forKey:@"userName"];
-    [reservationEntity setObject:self.roomNameField.text forKey:@"roomName"];
-    [reservationEntity setObject:[currentUser objectForKey:@"organization"] forKey:@"organization"];
-    
-    [reservationEntity saveInBackground:^(BaasioEntity *entity) {
-        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 성공" description:@"예약이 완료되었습니다" type:TWMessageBarMessageTypeSuccess];
-        [self.navigationController popViewControllerAnimated:YES];
+    [query queryInBackground:^(NSArray *objects) {
+        NSLog(@"reservationData %@", objects);
+        
+        // 기존 예약된 정보가 없을 때
+        if (objects.count == 0) {
+            [self saveReservation];
+            
+        // 기존 예약된 정보가 있을 때
+        } else {
+            NSInteger addStartTime = [self.startTimeField.text integerValue];
+            NSInteger addEndTime = [self.endTimeField.text integerValue];
+            BOOL duplicatePlag = NO;
+            for (NSDictionary *dict in objects) {
+                if ([self.addType isEqualToString:@"update"] && [[dict objectForKey:@"uuid"] isEqualToString:[self.updateData objectForKey:@"uuid"]]) {
+                    continue;
+                }
+                NSInteger startTime = [[dict objectForKey:@"startTime"] integerValue];
+                NSInteger endTime = [[dict objectForKey:@"endTime"] integerValue];
+                
+                if ((startTime <= addStartTime && addStartTime < endTime) || (startTime < addEndTime && addEndTime <= endTime)) {
+                    duplicatePlag = YES;
+                }
+            }
+            
+            if (duplicatePlag) {
+                [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 실패" description:@"이미 예약된 시간입니다" type:TWMessageBarMessageTypeError];
+            } else {
+                [self saveReservation];
+            }
+        }
     } failureBlock:^(NSError *error) {
-        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 실패" description:@"예약이 실패했습니다" type:TWMessageBarMessageTypeError];
-        NSLog(@"%@", error);
+        NSLog(@"load rooms fail %@", error.description);
     }];
 }
 
 - (void)dateSelected:(id)sender {
     if (currentDateField == 0) {
         [self.startTimeField setText:[dateFormatter stringFromDate:self.datePicker.date]];
-    } else if (currentDateField ==1) {
+    } else if (currentDateField == 1) {
         [self.endTimeField setText:[dateFormatter stringFromDate:self.datePicker.date]];
-    } else {
+    } else if (currentDateField == 2){
         [self.dateField setText:[dateFormatter stringFromDate:self.datePicker.date]];
     }
+    currentDateField = 3;
     [self datePickerHide];
 }
 
@@ -159,24 +215,29 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [self dateSelected:nil];
+    
     if (textField.tag == 1000) {
         [self roomPickerShow];
         [self datePickerHide];
-        currentDateField = 3;
+        [self.meetingDescriptionField resignFirstResponder];
+        
+    } else if (textField.tag == 1002) {
+        [self roomPickerHide];
+        [self datePickerHide];
+        return YES;
         
     } else {
         if (textField.tag == 1001) {
             currentDateField = 2;
             [dateFormatter setDateFormat:@"yyMMdd"];
             [self.datePicker setDatePickerMode:UIDatePickerModeDate];
-        } else {
-            if (currentDateField != 3) {
-                [self dateSelected:nil];
-            }
             
-            if (textField.tag == 1002) {
+        } else {
+            
+            if (textField.tag == 1003) {
                 currentDateField = 0;
-            } else if (textField.tag == 1003) {
+            } else if (textField.tag == 1004) {
                 currentDateField = 1;
             }
             [dateFormatter setDateFormat:@"HHmm"];
@@ -186,6 +247,7 @@
         
         [self roomPickerHide];
         [self datePickerShow];
+        [self.meetingDescriptionField resignFirstResponder];
     }
     
     return NO;
@@ -198,6 +260,16 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (roomArray.count > 0) {
+        [self.roomNameField setText:[[roomArray objectAtIndex:0] objectForKey:@"roomName"]];
+        if ([addType isEqualToString:@"update"]) {
+            [self.roomNameField setText:[self.updateData objectForKey:@"roomName"]];
+            [self.dateField setText:[self.updateData objectForKey:@"date"]];
+            [self.startTimeField setText:[self.updateData objectForKey:@"startTime"]];
+            [self.endTimeField setText:[self.updateData objectForKey:@"endTime"]];
+            [self.meetingDescriptionField setText:[self.updateData objectForKey:@"description"]];
+        }
+    }
     return roomArray.count;
 }
 

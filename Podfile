@@ -5,3 +5,4 @@ pod 'ReactiveCocoa'
 
 #라이브러리
 pod 'TWMessageBarManager'
+pod 'RNBlurModalView'

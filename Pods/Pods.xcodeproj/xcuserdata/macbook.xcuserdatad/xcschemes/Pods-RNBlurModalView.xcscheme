@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "23516484F95C45428EF8B4A2"
-               BuildableName = "libPods-DropdownMenu.a"
-               BlueprintName = "Pods-DropdownMenu"
+               BlueprintIdentifier = "11B67381EC1B4B47B1D2890E"
+               BuildableName = "libPods-RNBlurModalView.a"
+               BlueprintName = "Pods-RNBlurModalView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

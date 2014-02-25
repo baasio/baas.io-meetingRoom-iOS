@@ -41,7 +41,7 @@
         if ([autoLoginSwitch isOn]) {
             [userDefaults setObject:userNameField.text forKey:@"userName"];
             [userDefaults setObject:pwdField.text forKey:@"password"];
-            [userDefaults setBool:autoLoginSwitch.state forKey:@"autoLogin"];
+            [userDefaults setBool:[autoLoginSwitch isOn] forKey:@"autoLogin"];
             [userDefaults synchronize];
         }
         

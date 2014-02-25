@@ -10,7 +10,10 @@
 #import <baas.io/Baas.h>
 #import <TWMessageBarManager/TWMessageBarManager.h>
 
-@interface InitViewController ()
+#import "LoginViewController.h"
+#import "SignUpViewController.h"
+
+@interface InitViewController () <LoginViewDelegate, SignUpViewDelegate>
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @end
 
@@ -54,10 +57,7 @@
     }
 }
 
-- (void)callLoginView {
-    [self performSegueWithIdentifier:@"loginModal" sender:nil];
-}
-
+#pragma mark - LoginView Delegate
 - (void)loginSuccess {
     BaasioUser *user = [BaasioUser currentUser];
     [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"로그인 성공" description:[NSString stringWithFormat:@"%@님 환영합니다", user.username] type:TWMessageBarMessageTypeSuccess];
@@ -66,6 +66,7 @@
     }];
 }
 
+#pragma mark - SignUp View Delegate
 - (void)signUpSuccess {
     [self checkSavedLogin];
     BaasioUser *user = [BaasioUser currentUser];

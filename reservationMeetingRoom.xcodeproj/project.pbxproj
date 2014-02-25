@@ -32,6 +32,11 @@
 		FA30E86918ADA76800DB5B41 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E86818ADA76800DB5B41 /* MainViewController.m */; };
 		FA30E87218ADE05100DB5B41 /* AddMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E87118ADE05100DB5B41 /* AddMeetingViewController.m */; };
 		FA30E87818B2FFAE00DB5B41 /* AddRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E87718B2FFAE00DB5B41 /* AddRoomViewController.m */; };
+		FA30E87B18B469EA00DB5B41 /* rmScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E87A18B469EA00DB5B41 /* rmScrollView.m */; };
+		FA30E87D18B5A49B00DB5B41 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA30E87C18B5A49B00DB5B41 /* gear@2x.png */; };
+		FA30E88018B5A57A00DB5B41 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E87F18B5A57A00DB5B41 /* SettingViewController.m */; };
+		FA30E88318B5C22A00DB5B41 /* Arrow_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA30E88118B5C22A00DB5B41 /* Arrow_left@2x.png */; };
+		FA30E88418B5C22A00DB5B41 /* Arrow_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA30E88218B5C22A00DB5B41 /* Arrow_right@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +86,13 @@
 		FA30E87118ADE05100DB5B41 /* AddMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMeetingViewController.m; sourceTree = "<group>"; };
 		FA30E87618B2FFAE00DB5B41 /* AddRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRoomViewController.h; sourceTree = "<group>"; };
 		FA30E87718B2FFAE00DB5B41 /* AddRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRoomViewController.m; sourceTree = "<group>"; };
+		FA30E87918B469EA00DB5B41 /* rmScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rmScrollView.h; sourceTree = "<group>"; };
+		FA30E87A18B469EA00DB5B41 /* rmScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rmScrollView.m; sourceTree = "<group>"; };
+		FA30E87C18B5A49B00DB5B41 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		FA30E87E18B5A57A00DB5B41 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		FA30E87F18B5A57A00DB5B41 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		FA30E88118B5C22A00DB5B41 /* Arrow_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow_left@2x.png"; sourceTree = "<group>"; };
+		FA30E88218B5C22A00DB5B41 /* Arrow_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow_right@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +176,10 @@
 				FA30E87118ADE05100DB5B41 /* AddMeetingViewController.m */,
 				FA30E87618B2FFAE00DB5B41 /* AddRoomViewController.h */,
 				FA30E87718B2FFAE00DB5B41 /* AddRoomViewController.m */,
+				FA30E87E18B5A57A00DB5B41 /* SettingViewController.h */,
+				FA30E87F18B5A57A00DB5B41 /* SettingViewController.m */,
+				FA30E87918B469EA00DB5B41 /* rmScrollView.h */,
+				FA30E87A18B469EA00DB5B41 /* rmScrollView.m */,
 				FA30E83218AB574600DB5B41 /* Images.xcassets */,
 				FA30E85D18ACA68E00DB5B41 /* Resource */,
 				FA30E82118AB574600DB5B41 /* Supporting Files */,
@@ -203,6 +219,9 @@
 		FA30E85D18ACA68E00DB5B41 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FA30E88118B5C22A00DB5B41 /* Arrow_left@2x.png */,
+				FA30E88218B5C22A00DB5B41 /* Arrow_right@2x.png */,
+				FA30E87C18B5A49B00DB5B41 /* gear@2x.png */,
 				FA30E85E18ACA69900DB5B41 /* checked.png */,
 				FA30E85F18ACA69900DB5B41 /* unchecked.png */,
 			);
@@ -258,6 +277,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = kt;
 				TargetAttributes = {
+					FA30E81618AB574600DB5B41 = {
+						DevelopmentTeam = VPD33TSW3P;
+					};
 					FA30E83718AB574600DB5B41 = {
 						TestTargetID = FA30E81618AB574600DB5B41;
 					};
@@ -289,9 +311,12 @@
 			files = (
 				FA30E83318AB574600DB5B41 /* Images.xcassets in Resources */,
 				FA30E82518AB574600DB5B41 /* InfoPlist.strings in Resources */,
+				FA30E87D18B5A49B00DB5B41 /* gear@2x.png in Resources */,
 				FA30E86018ACA69900DB5B41 /* checked.png in Resources */,
+				FA30E88418B5C22A00DB5B41 /* Arrow_right@2x.png in Resources */,
 				FA30E86118ACA69900DB5B41 /* unchecked.png in Resources */,
 				FA30E82E18AB574600DB5B41 /* Main.storyboard in Resources */,
+				FA30E88318B5C22A00DB5B41 /* Arrow_left@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,9 +373,11 @@
 				FA30E83118AB574600DB5B41 /* InitViewController.m in Sources */,
 				FA30E86918ADA76800DB5B41 /* MainViewController.m in Sources */,
 				FA30E82B18AB574600DB5B41 /* AppDelegate.m in Sources */,
+				FA30E87B18B469EA00DB5B41 /* rmScrollView.m in Sources */,
 				FA30E87218ADE05100DB5B41 /* AddMeetingViewController.m in Sources */,
 				FA30E82718AB574600DB5B41 /* main.m in Sources */,
 				FA30E87818B2FFAE00DB5B41 /* AddRoomViewController.m in Sources */,
+				FA30E88018B5A57A00DB5B41 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,8 +503,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32F68887D49C4405BB22BEE5 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kim Dong-Geun (97N9Z2XK33)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kim Dong-Geun (97N9Z2XK33)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/macbook/Documents/baas.io-sdk-ios",
@@ -490,6 +520,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -498,8 +529,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32F68887D49C4405BB22BEE5 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kim Dong-Geun (97N9Z2XK33)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kim Dong-Geun (97N9Z2XK33)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/macbook/Documents/baas.io-sdk-ios",
@@ -512,6 +546,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

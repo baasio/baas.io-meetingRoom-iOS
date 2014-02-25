@@ -6,11 +6,11 @@
 // project.
 
 
-// DropdownMenu
-#define COCOAPODS_POD_AVAILABLE_DropdownMenu
-#define COCOAPODS_VERSION_MAJOR_DropdownMenu 1
-#define COCOAPODS_VERSION_MINOR_DropdownMenu 0
-#define COCOAPODS_VERSION_PATCH_DropdownMenu 0
+// RNBlurModalView
+#define COCOAPODS_POD_AVAILABLE_RNBlurModalView
+#define COCOAPODS_VERSION_MAJOR_RNBlurModalView 0
+#define COCOAPODS_VERSION_MINOR_RNBlurModalView 1
+#define COCOAPODS_VERSION_PATCH_RNBlurModalView 0
 
 // ReactiveCocoa
 #define COCOAPODS_POD_AVAILABLE_ReactiveCocoa

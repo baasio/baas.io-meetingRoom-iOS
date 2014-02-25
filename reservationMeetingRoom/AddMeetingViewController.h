@@ -10,4 +10,7 @@
 
 @interface AddMeetingViewController : UIViewController
 
+@property (nonatomic, strong) NSString *addType;
+@property (nonatomic, strong) NSDictionary *updateData;
+
 @end
