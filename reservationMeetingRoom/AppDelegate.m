@@ -12,7 +12,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Baasio setApplicationInfo:@"5d98fe39-65f0-11e2-bb6c-06fd000000c2" applicationName:@"765b3806-93b5-11e3-bb03-06a6fa0000b9"];
+    [Baasio setApplicationInfo:@"5d98fe39-65f0-11e2-bb6c-06fd000000c2" applicationName:@"8e22e1c0-9dec-11e3-ad13-06f4fe0000b5"];
     
     [BaasioPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     return YES;
@@ -33,7 +33,8 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"noti!!!!");
+    NSLog(@"noti!!!! %@", userInfo);
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

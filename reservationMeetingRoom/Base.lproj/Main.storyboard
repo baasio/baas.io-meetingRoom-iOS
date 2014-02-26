@@ -603,12 +603,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="addMeetingRoom" destination="zUP-7i-BNi" eventType="touchUpInside" id="zcL-SM-GqX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use Users :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYf-la-Xq6">
-                                <rect key="frame" x="38" y="166" width="89" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="회사 이름" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hgJ-LQ-Kqw">
                                 <rect key="frame" x="135" y="86" width="165" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -627,15 +621,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="zUP-7i-BNi" id="lh4-6w-3SH"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex) user1,user2, ..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Bl-O0-hRY">
-                                <rect key="frame" x="135" y="162" width="165" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                                <connections>
-                                    <outlet property="delegate" destination="zUP-7i-BNi" id="LH3-5N-nSz"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -643,7 +628,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="organizationField" destination="hgJ-LQ-Kqw" id="7XZ-AG-nQn"/>
                         <outlet property="roomNameField" destination="DpH-ji-yTN" id="nOn-Kh-Dx3"/>
-                        <outlet property="usersField" destination="0Bl-O0-hRY" id="hSy-xv-Z9d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLW-Tl-9Al" userLabel="First Responder" sceneMemberID="firstResponder"/>

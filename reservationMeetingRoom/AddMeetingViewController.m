@@ -77,6 +77,37 @@
     }];
 }
 
+- (void)setReservationMessage {
+    BaasioPush *push = [[BaasioPush alloc] init];
+    BaasioMessage *message = [[BaasioMessage alloc] init];
+    
+    NSDateComponents *reserve = [[NSDateComponents alloc] init];
+    reserve.year = [[self.dateField.text substringToIndex:2] integerValue] + 2000;
+    reserve.month = [[self.dateField.text substringWithRange:NSMakeRange(2, 2)] integerValue];
+    reserve.day = [[self.dateField.text substringFromIndex:4] integerValue];
+    reserve.hour = [[self.startTimeField.text substringToIndex:2] integerValue];
+    reserve.minute = [[self.startTimeField.text substringFromIndex:2] integerValue];
+    
+    NSLog(@"reserve %@", reserve);
+//    reserve.year = 2014;
+//    reserve.month = 2;
+//    reserve.day = 26;
+//    reserve.hour = 14;
+//    reserve.minute = 0;
+    
+    message.reserve = reserve;
+    message.alert = [NSString stringWithFormat:@"%@에서 회의가 곧 시작됩니다.", self.roomNameField.text];
+    message.badge = 1;
+    message.sound = @"default";
+    message.to = [NSMutableArray arrayWithObject:[[BaasioUser currentUser] objectForKey:@"uuid"]];
+    
+    [push sendPushInBackground:message successBlock:^{
+        NSLog(@"푸시 예약 성공");
+    } failureBlock:^(NSError *error) {
+        NSLog(@"푸시 예약 실패 %@", error);
+    }];
+}
+
 - (void)saveReservation {
     BaasioEntity *reservationEntity = [BaasioEntity entitytWithName:@"meetings"];
     [reservationEntity setObject:self.startTimeField.text forKey:@"startTime"];
@@ -101,6 +132,7 @@
         [reservationEntity saveInBackground:^(BaasioEntity *entity) {
             [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 성공" description:@"예약이 완료되었습니다" type:TWMessageBarMessageTypeSuccess];
             [self.navigationController popViewControllerAnimated:YES];
+            [self setReservationMessage];
         } failureBlock:^(NSError *error) {
             [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"예약 실패" description:@"예약이 실패했습니다" type:TWMessageBarMessageTypeError];
             NSLog(@"%@", error);

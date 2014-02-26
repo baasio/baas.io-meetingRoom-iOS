@@ -14,7 +14,6 @@
 
 @property (nonatomic, strong) IBOutlet UITextField *organizationField;
 @property (nonatomic, strong) IBOutlet UITextField *roomNameField;
-@property (nonatomic, strong) IBOutlet UITextField *usersField;
 
 @property (nonatomic, strong) BaasioUser *currentUser;
 @property (nonatomic, strong) NSString *organization;
