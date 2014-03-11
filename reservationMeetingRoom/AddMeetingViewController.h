@@ -2,7 +2,7 @@
 //  AddMeetingViewController.h
 //  reservationMeetingRoom
 //
-//  Created by DGMacBook on 2014. 2. 14..
+//  Created by KDG on 2014. 2. 14..
 //  Copyright (c) 2014년 kt. All rights reserved.
 //
 

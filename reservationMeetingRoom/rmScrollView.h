@@ -2,7 +2,7 @@
 //  rmScrollView.h
 //  reservationMeetingRoom
 //
-//  Created by DGMacBook on 2014. 2. 19..
+//  Created by KDG on 2014. 2. 19..
 //  Copyright (c) 2014년 kt. All rights reserved.
 //
 

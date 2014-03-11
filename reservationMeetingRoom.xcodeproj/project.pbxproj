@@ -22,7 +22,6 @@
 		FA30E83C18AB574600DB5B41 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA30E81E18AB574600DB5B41 /* UIKit.framework */; };
 		FA30E84418AB574600DB5B41 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA30E84218AB574600DB5B41 /* InfoPlist.strings */; };
 		FA30E84618AB574600DB5B41 /* reservationMeetingRoomTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E84518AB574600DB5B41 /* reservationMeetingRoomTests.m */; };
-		FA30E85018AB588C00DB5B41 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA30E84F18AB588B00DB5B41 /* baas.io.framework */; };
 		FA30E85218AB589400DB5B41 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA30E85118AB589400DB5B41 /* MobileCoreServices.framework */; };
 		FA30E85418AB589A00DB5B41 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA30E85318AB589A00DB5B41 /* SystemConfiguration.framework */; };
 		FA30E85718AB710100DB5B41 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E85618AB710100DB5B41 /* LoginViewController.m */; };
@@ -37,6 +36,7 @@
 		FA30E88018B5A57A00DB5B41 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA30E87F18B5A57A00DB5B41 /* SettingViewController.m */; };
 		FA30E88318B5C22A00DB5B41 /* Arrow_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA30E88118B5C22A00DB5B41 /* Arrow_left@2x.png */; };
 		FA30E88418B5C22A00DB5B41 /* Arrow_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA30E88218B5C22A00DB5B41 /* Arrow_right@2x.png */; };
+		FA76049918CEEBB700A956B5 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA76049818CEEBB700A956B5 /* baas.io.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,6 @@
 		FA30E84118AB574600DB5B41 /* reservationMeetingRoomTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "reservationMeetingRoomTests-Info.plist"; sourceTree = "<group>"; };
 		FA30E84318AB574600DB5B41 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA30E84518AB574600DB5B41 /* reservationMeetingRoomTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = reservationMeetingRoomTests.m; sourceTree = "<group>"; };
-		FA30E84F18AB588B00DB5B41 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = baas.io.framework; path = "../baas.io-sdk-ios/baas.io.framework"; sourceTree = "<group>"; };
 		FA30E85118AB589400DB5B41 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		FA30E85318AB589A00DB5B41 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FA30E85518AB710100DB5B41 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -93,6 +92,7 @@
 		FA30E87F18B5A57A00DB5B41 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FA30E88118B5C22A00DB5B41 /* Arrow_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow_left@2x.png"; sourceTree = "<group>"; };
 		FA30E88218B5C22A00DB5B41 /* Arrow_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow_right@2x.png"; sourceTree = "<group>"; };
+		FA76049818CEEBB700A956B5 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +100,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA76049918CEEBB700A956B5 /* baas.io.framework in Frameworks */,
 				FA30E85418AB589A00DB5B41 /* SystemConfiguration.framework in Frameworks */,
 				FA30E85218AB589400DB5B41 /* MobileCoreServices.framework in Frameworks */,
-				FA30E85018AB588C00DB5B41 /* baas.io.framework in Frameworks */,
 				FA30E81D18AB574600DB5B41 /* CoreGraphics.framework in Frameworks */,
 				FA30E81F18AB574600DB5B41 /* UIKit.framework in Frameworks */,
 				FA30E81B18AB574600DB5B41 /* Foundation.framework in Frameworks */,
@@ -146,9 +146,9 @@
 		FA30E81918AB574600DB5B41 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA76049818CEEBB700A956B5 /* baas.io.framework */,
 				FA30E85318AB589A00DB5B41 /* SystemConfiguration.framework */,
 				FA30E85118AB589400DB5B41 /* MobileCoreServices.framework */,
-				FA30E84F18AB588B00DB5B41 /* baas.io.framework */,
 				FA30E81A18AB574600DB5B41 /* Foundation.framework */,
 				FA30E81C18AB574600DB5B41 /* CoreGraphics.framework */,
 				FA30E81E18AB574600DB5B41 /* UIKit.framework */,
@@ -511,10 +511,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/macbook/Documents/baas.io-sdk-ios",
+					/Users/macbook/Documents/reservationMeetingRoom,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "reservationMeetingRoom/reservationMeetingRoom-Prefix.pch";
 				INFOPLIST_FILE = "reservationMeetingRoom/reservationMeetingRoom-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -537,10 +539,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/macbook/Documents/baas.io-sdk-ios",
+					/Users/macbook/Documents/reservationMeetingRoom,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "reservationMeetingRoom/reservationMeetingRoom-Prefix.pch";
 				INFOPLIST_FILE = "reservationMeetingRoom/reservationMeetingRoom-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

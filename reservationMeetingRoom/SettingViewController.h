@@ -2,7 +2,7 @@
 //  SettingViewController.h
 //  reservationMeetingRoom
 //
-//  Created by DGMacBook on 2014. 2. 20..
+//  Created by KDG on 2014. 2. 20..
 //  Copyright (c) 2014년 kt. All rights reserved.
 //
 
