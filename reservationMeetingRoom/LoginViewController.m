@@ -21,28 +21,28 @@
 
 @implementation LoginViewController
 
-@synthesize userNameField;
-@synthesize pwdField;
-@synthesize autoLoginSwitch;
-@synthesize userDefaults;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.userNameField becomeFirstResponder];
-    userDefaults = [NSUserDefaults standardUserDefaults];
+    [_userNameField becomeFirstResponder];
+    _userDefaults = [NSUserDefaults standardUserDefaults];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+/**
+ baas.io에 로그인 요청을 한다.
+ 로그인 버튼을 선택하거나 마지막 UITextField에서 Return 키를 눌렀을 때 호출된다.
+ 자동로그인에 체크되어 있으면 UserDefaults에 로그인 정보를 저장한다.
+ */
 - (void)login:(id)sender {
-    [BaasioUser signInBackground:userNameField.text password:pwdField.text successBlock:^{
-        if ([autoLoginSwitch isOn]) {
-            [userDefaults setObject:userNameField.text forKey:@"userName"];
-            [userDefaults setObject:pwdField.text forKey:@"password"];
-            [userDefaults setBool:[autoLoginSwitch isOn] forKey:@"autoLogin"];
-            [userDefaults synchronize];
+    [BaasioUser signInBackground:_userNameField.text password:_pwdField.text successBlock:^{
+        if ([_autoLoginSwitch isOn]) {
+            [_userDefaults setObject:_userNameField.text forKey:@"userName"];
+            [_userDefaults setObject:_pwdField.text forKey:@"password"];
+            [_userDefaults setBool:[_autoLoginSwitch isOn] forKey:@"autoLogin"];
+            [_userDefaults synchronize];
         }
         
         [self dismissViewControllerAnimated:YES completion:^{
@@ -58,6 +58,11 @@
 }
 
 #pragma mark - UITextField Delegate
+/**
+ UITextField의 Delegate
+ Return키를 누를때마다 호출된다. 호출한 TextFiled의 Tag를 확인 후 첫번째 TextField일 경우 다음 TextField를 호출
+ 마지막 TextField일 경우 키보드를 숨긴 후 로그인을 호출한다
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 1000) {
         UIResponder *nextField = [textField.superview viewWithTag:1001];
@@ -65,8 +70,6 @@
     } else if (textField.tag == 1001) {
         [textField resignFirstResponder];
         [self login:nil];
-    } else {
-        NSLog(@"알수 없는 텍스트필드");
     }
     
     return NO;

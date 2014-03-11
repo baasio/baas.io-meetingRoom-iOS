@@ -19,12 +19,11 @@
 
 @implementation InitViewController
 
-@synthesize userDefaults;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    userDefaults = [NSUserDefaults standardUserDefaults];
+    _userDefaults = [NSUserDefaults standardUserDefaults];
     
+    // 자동 로그인 체크
     [self checkSavedLogin];
 }
 
@@ -32,11 +31,17 @@
     [super didReceiveMemoryWarning];
 }
 
+/**
+ userDefaults 에 userName과 autoLogin을 이용하여 자동로그인 허용인지 확인 후
+ 있을 경우 로그인 시도
+ 성공시 MainViewController를 호출
+ 실패시 메세지 출력 후 대기
+ */
 - (void)checkSavedLogin {
-    NSString *savedUserName = [userDefaults objectForKey:@"userName"];
-    BOOL autoLogin = [userDefaults boolForKey:@"autoLogin"];
+    NSString *savedUserName = [_userDefaults objectForKey:@"userName"];
+    BOOL autoLogin = [_userDefaults boolForKey:@"autoLogin"];
     if (savedUserName != nil && autoLogin) {
-        NSString *savedUserPwd = [userDefaults objectForKey:@"password"];
+        NSString *savedUserPwd = [_userDefaults objectForKey:@"password"];
         [BaasioUser signInBackground:savedUserName password:savedUserPwd successBlock:^{
             NSLog(@"autoLogin success id = %@, pwd = %@", savedUserName, savedUserPwd);
             [self loginSuccess];
@@ -47,6 +52,9 @@
     }
 }
 
+/**
+ segue를 호출 할 때 캐치해서 Delegate 설정
+ */
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loginModal"]) {
         LoginViewController *loginView = segue.destinationViewController;
@@ -58,6 +66,10 @@
 }
 
 #pragma mark - LoginView Delegate
+/**
+ 로그인이 성공했을때 LoginViewController에서 Delegate 호출
+ MainViewController를 호출한다
+ */
 - (void)loginSuccess {
     BaasioUser *user = [BaasioUser currentUser];
     [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"로그인 성공" description:[NSString stringWithFormat:@"%@님 환영합니다", user.username] type:TWMessageBarMessageTypeSuccess];
@@ -67,6 +79,10 @@
 }
 
 #pragma mark - SignUp View Delegate
+/**
+ 회원가입에 성공했을 때 SignUpViewController에서 Delegate호출
+ 회원가입 성공 시 로그인 정보를 저장하므로 자동로그인인지 체크 후 자동로그인이면 로그인 루틴을 탄다
+ */
 - (void)signUpSuccess {
     [self checkSavedLogin];
     BaasioUser *user = [BaasioUser currentUser];

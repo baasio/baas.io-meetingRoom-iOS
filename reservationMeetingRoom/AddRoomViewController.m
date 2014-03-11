@@ -24,16 +24,13 @@
 
 @implementation AddRoomViewController
 
-@synthesize currentUser;
-@synthesize organization;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    currentUser = [BaasioUser currentUser];
-    organization = [currentUser objectForKey:@"organization"];
+    _currentUser = [BaasioUser currentUser];
+    _organization = [_currentUser objectForKey:@"organization"];
     
-    [self.organizationField setText:organization];
+    [_organizationField setText:_organization];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,10 +40,10 @@
 #pragma mark - IBAction
 - (void)addMeetingRoom {
     BaasioEntity *meetingRoomEntity = [BaasioEntity entitytWithName:@"meeting_rooms"];
-    [meetingRoomEntity setObject:self.roomNameField.text forKey:@"roomName"];
-    [meetingRoomEntity setObject:self.currentUser.username forKey:@"owner"];
-    [meetingRoomEntity setObject:[self.currentUser objectForKey:@"organization"] forKey:@"organization"];
-    [meetingRoomEntity setObject:[NSString stringWithFormat:@"%@_%@", organization, self.roomNameField.text] forKey:@"name"];
+    [meetingRoomEntity setObject:_roomNameField.text forKey:@"roomName"];
+    [meetingRoomEntity setObject:_currentUser.username forKey:@"owner"];
+    [meetingRoomEntity setObject:[_currentUser objectForKey:@"organization"] forKey:@"organization"];
+    [meetingRoomEntity setObject:[NSString stringWithFormat:@"%@_%@", _organization, _roomNameField.text] forKey:@"name"];
     
     [meetingRoomEntity saveInBackground:^(BaasioEntity *entity) {
         [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"회의실 등록 성공" description:[NSString stringWithFormat:@"%@ 회의실이 등록되었습니다", self.roomNameField.text] type:TWMessageBarMessageTypeSuccess];

@@ -20,14 +20,11 @@
 
 @implementation SettingViewController
 
-@synthesize pushSwitch;
-@synthesize nameLabel;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     BaasioUser *currentUser = [BaasioUser currentUser];
-    [nameLabel setText:currentUser.username];
+    [_nameLabel setText:currentUser.username];
 }
 
 - (void)didReceiveMemoryWarning {

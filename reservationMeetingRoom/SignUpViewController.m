@@ -27,8 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.userDefaults = [NSUserDefaults standardUserDefaults];
-    [self.idField becomeFirstResponder];
+    _userDefaults = [NSUserDefaults standardUserDefaults];
+    [_idField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +36,11 @@
 }
 
 #pragma mark - UITextField Delegate
+/**
+ UITextField의 Delegate
+ Return키를 누를때마다 호출된다. 호출한 TextFiled의 Tag를 확인 후 첫번째 TextField일 경우 다음 TextField를 호출
+ 마지막 TextField일 경우 키보드를 숨긴 후 회원가입을 호출한다
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag >= 1000 && textField.tag <= 1003) {
         UIResponder *nextField = [textField.superview viewWithTag:textField.tag + 1];
@@ -43,27 +48,28 @@
     } else if (textField.tag == 1004) {
         [textField resignFirstResponder];
         [self signUp:nil];
-    } else {
-        NSLog(@"알수 없는 텍스트필드");
     }
     
     return NO;
 }
 
 #pragma mark - IBAction
+/**
+ baas.io에 회원가입 호출
+ */
 - (void)signUp:(id)sender {
     BaasioUser *user = [BaasioUser user];
-    [user setObject:self.idField.text forKey:@"username"];
-    [user setObject:self.passwordField.text forKey:@"password"];
-    [user setObject:self.nameField.text forKey:@"name"];
-    [user setObject:self.emailField.text forKey:@"email"];
-    [user setObject:self.organizationField.text forKey:@"organization"];
+    [user setObject:_idField.text forKey:@"username"];
+    [user setObject:_passwordField.text forKey:@"password"];
+    [user setObject:_nameField.text forKey:@"name"];
+    [user setObject:_emailField.text forKey:@"email"];
+    [user setObject:_organizationField.text forKey:@"organization"];
     
     [user signUpInBackground:^{
-        [self.userDefaults setObject:self.idField.text forKey:@"userName"];
-        [self.userDefaults setObject:self.passwordField.text forKey:@"password"];
-        [self.userDefaults setBool:YES forKey:@"autoLogin"];
-        [self.userDefaults synchronize];
+        [_userDefaults setObject:_idField.text forKey:@"userName"];
+        [_userDefaults setObject:_passwordField.text forKey:@"password"];
+        [_userDefaults setBool:YES forKey:@"autoLogin"];
+        [_userDefaults synchronize];
         
         [self dismissViewControllerAnimated:YES completion:^{
             if ([self.delegate respondsToSelector:@selector(signUpSuccess)]) {
