@@ -12,8 +12,8 @@
 
 @interface AddRoomViewController () <UITextFieldDelegate>
 
-@property (nonatomic, strong) IBOutlet UITextField *organizationField;
-@property (nonatomic, strong) IBOutlet UITextField *roomNameField;
+@property (nonatomic, weak) IBOutlet UITextField *organizationField;
+@property (nonatomic, weak) IBOutlet UITextField *roomNameField;
 
 @property (nonatomic, strong) BaasioUser *currentUser;
 @property (nonatomic, strong) NSString *organization;

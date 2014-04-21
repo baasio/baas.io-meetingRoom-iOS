@@ -12,16 +12,16 @@
 
 @interface AddMeetingViewController () <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UITextField *roomNameField;
-@property (nonatomic, strong) IBOutlet UITextField *dateField;
-@property (nonatomic, strong) IBOutlet UITextField *startTimeField;
-@property (nonatomic, strong) IBOutlet UITextField *endTimeField;
-@property (nonatomic, strong) IBOutlet UITextField *meetingDescriptionField;
+@property (nonatomic, weak) IBOutlet UITextField *roomNameField;
+@property (nonatomic, weak) IBOutlet UITextField *dateField;
+@property (nonatomic, weak) IBOutlet UITextField *startTimeField;
+@property (nonatomic, weak) IBOutlet UITextField *endTimeField;
+@property (nonatomic, weak) IBOutlet UITextField *meetingDescriptionField;
 
-@property (nonatomic, strong) IBOutlet UIDatePicker *datePicker;
-@property (nonatomic, strong) IBOutlet UIPickerView *roomPicker;
-@property (nonatomic, strong) IBOutlet UIToolbar *dateToolBar;
-@property (nonatomic, strong) IBOutlet UIToolbar *roomToolBar;
+@property (nonatomic, weak) IBOutlet UIDatePicker *datePicker;
+@property (nonatomic, weak) IBOutlet UIPickerView *roomPicker;
+@property (nonatomic, weak) IBOutlet UIToolbar *dateToolBar;
+@property (nonatomic, weak) IBOutlet UIToolbar *roomToolBar;
 
 @property (nonatomic, strong) NSArray *roomArray;
 @property NSInteger currentDateField;
@@ -80,13 +80,6 @@
     reserve.day = [[_dateField.text substringFromIndex:4] integerValue];
     reserve.hour = [[_startTimeField.text substringToIndex:2] integerValue];
     reserve.minute = [[_startTimeField.text substringFromIndex:2] integerValue];
-    
-    NSLog(@"reserve %@", reserve);
-//    reserve.year = 2014;
-//    reserve.month = 2;
-//    reserve.day = 26;
-//    reserve.hour = 14;
-//    reserve.minute = 0;
     
     message.reserve = reserve;
     message.alert = [NSString stringWithFormat:@"%@에서 회의가 곧 시작됩니다.", self.roomNameField.text];

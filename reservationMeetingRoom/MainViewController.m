@@ -10,6 +10,7 @@
 #import <baas.io/Baas.h>
 #import <TWMessageBarManager/TWMessageBarManager.h>
 #import <RNBlurModalView/RNBlurModalView.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "rmScrollView.h"
 #import "SettingViewController.h"
@@ -17,7 +18,9 @@
 
 @interface MainViewController () <SettingViewDelegate, rmScrollViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UIButton *yesterdayButton;
+@property (nonatomic, weak) IBOutlet UIButton *tomorrowButton;
 
 @property (nonatomic, strong) rmScrollView *scrollView;
 @property (nonatomic, strong) NSDate *currentDate;
@@ -25,15 +28,30 @@
 @property (nonatomic, strong) RNBlurModalView *modalView;
 @property (nonatomic, strong) NSString *addType;
 
-- (IBAction)dayChange:(id)sender;
-
 @end
 
 @implementation MainViewController
 
+- (void)dayChange:(NSDate *)date {
+    _currentDate = date;
+    [self setNavigationTitle];
+    [_scrollView setCurrentDate:_currentDate];
+    [_scrollView reloadView];
+    
+    NSLog(@"date change : %@", _currentDate);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _currentDate = [NSDate date];
+    
+    [[_yesterdayButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self dayChange:[NSDate dateWithTimeInterval:-(20*60*60) sinceDate:_currentDate]];
+    }];
+    
+    [[_tomorrowButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self dayChange:[NSDate dateWithTimeInterval:(20*60*60) sinceDate:_currentDate]];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -147,21 +165,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"로그아웃" description:@"로그아웃 되었습니다" type:TWMessageBarMessageTypeInfo];
     }];
-}
-
-#pragma mark - IBAction
-- (void)dayChange:(id)sender {
-    UIButton *button = (UIButton *)sender;
-    if (button.tag == 31) {
-        _currentDate = [NSDate dateWithTimeInterval:-(20*60*60) sinceDate:_currentDate];
-    } else {
-        _currentDate = [NSDate dateWithTimeInterval:(20*60*60) sinceDate:_currentDate];
-    }
-    [self setNavigationTitle];
-    [_scrollView setCurrentDate:_currentDate];
-    [_scrollView reloadView];
-    
-    NSLog(@"date change : %@", _currentDate);
 }
 
 @end
