@@ -9,14 +9,16 @@
 #import "LoginViewController.h"
 #import <baas.io/Baas.h>
 #import <TWMessageBarManager/TWMessageBarManager.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface LoginViewController () <UITextFieldDelegate>
-@property (nonatomic, strong) IBOutlet UITextField *userNameField;
-@property (nonatomic, strong) IBOutlet UITextField *pwdField;
-@property (nonatomic, strong) IBOutlet UISwitch *autoLoginSwitch;
+@property (nonatomic, weak) IBOutlet UITextField *userNameField;
+@property (nonatomic, weak) IBOutlet UITextField *pwdField;
+@property (nonatomic, weak) IBOutlet UISwitch *autoLoginSwitch;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 
-- (IBAction)login:(id)sender;
+@property (nonatomic, weak) IBOutlet UIButton *loginButton;
+
 @end
 
 @implementation LoginViewController
@@ -25,6 +27,10 @@
     [super viewDidLoad];
     [_userNameField becomeFirstResponder];
     _userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [[_loginButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self login];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +42,7 @@
  로그인 버튼을 선택하거나 마지막 UITextField에서 Return 키를 눌렀을 때 호출된다.
  자동로그인에 체크되어 있으면 UserDefaults에 로그인 정보를 저장한다.
  */
-- (void)login:(id)sender {
+- (void)login {
     [BaasioUser signInBackground:_userNameField.text password:_pwdField.text successBlock:^{
         if ([_autoLoginSwitch isOn]) {
             [_userDefaults setObject:_userNameField.text forKey:@"userName"];
@@ -52,7 +58,7 @@
         }];
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"로그인 에러 : %@", error);
+        NSLog(@"login fail : %@", error);
         [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"로그인 실패" description:error.description type:TWMessageBarMessageTypeError];
     }];
 }
@@ -69,7 +75,7 @@
         [nextField becomeFirstResponder];
     } else if (textField.tag == 1001) {
         [textField resignFirstResponder];
-        [self login:nil];
+        [self login];
     }
     
     return NO;
